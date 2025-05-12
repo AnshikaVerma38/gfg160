@@ -3,25 +3,28 @@
 
 // Note: A stock can only be sold if it has been bought previously and multiple stocks cannot be held on any given day.
 
-public class day7 {
-    public static int maxProfit(int[] prices) {
-        int minPrice = Integer.MAX_VALUE;
-        int maxProfit = 0;
+import java.util.*;
 
-        for (int price : prices) {
-            if (price < minPrice) {
-                minPrice = price;
-            } else {
-                int profit = price - minPrice;
-                maxProfit = Math.max(maxProfit, profit);
+public class day7 {
+
+    public static int stockBuyAndSell(int[] price, int n) {
+        int profit = 0;
+
+        for (int i = 1; i < n; i++) {
+            if (price[i] > price[i - 1]) {
+                profit += price[i] - price[i - 1];
             }
         }
 
-        return maxProfit;
+        return profit;
     }
 
     public static void main(String[] args) {
-        int[] prices = {7, 1, 5, 3, 6, 4};
-        System.out.println("Max Profit: " + maxProfit(prices)); 
+        int[] price = {1, 5, 3, 8, 12};
+        int n = price.length;
+
+        int maxProfit = stockBuyAndSell(price, n);
+
+        System.out.println("Maximum Profit: " + maxProfit);
     }
 }
